@@ -217,7 +217,7 @@ public class PayStationImplTest {
         ps.addPayment(25);
         ps.addPayment(25);
         ps.addPayment(5);
-   
+        ps.cancel();
          assertEquals("Cancel clears my coin map",
                 testMap, ps.getMyCoinMap());
    }
