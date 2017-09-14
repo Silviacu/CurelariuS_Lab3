@@ -1,6 +1,6 @@
 package paystation.domain;
 
-/**
+/**TESTING
  * Implementation of the pay station.
  *
  * Responsibilities:
