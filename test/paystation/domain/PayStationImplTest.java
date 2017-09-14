@@ -186,9 +186,20 @@ public class PayStationImplTest {
         testMap.put(5, 1);
         ps.addPayment(5);
         assertEquals("Should return map with key 5 and value 1", testMap, ps.cancel());
-        
    }
-    
+   
+   @Test
+   public void CancelReturnsMapContainingMixtureCoinEntered()
+    throws IllegalCoinException {
+       Map<Integer, Integer> testMap = new HashMap();
+        testMap.put(25, 2);
+        testMap.put(5,1);
+        ps.addPayment(25);
+        ps.addPayment(25);
+        ps.addPayment(5);
+        assertEquals("Cancel Should return map with key 5 and value 1 and key 25 and value 2 ", 
+                testMap, ps.cancel());
+   }
 
 
 }
