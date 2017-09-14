@@ -145,6 +145,7 @@ public class PayStationImplTest {
         ps.addPayment(5);
         ps.buy();
         assertEquals("Empty should return 5", 5, ps.empty());
+//        hi 
     }
 
 }
