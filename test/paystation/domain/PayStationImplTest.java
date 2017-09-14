@@ -201,5 +201,12 @@ public class PayStationImplTest {
                 testMap, ps.cancel());
    }
 
-
+ @Test
+   public void CancelReturnsMapThatDoesNotContainKeyForCoinNotEntered()
+    throws IllegalCoinException {
+       ps.addPayment(25);
+       ps.addPayment(5);
+       assertEquals("Cancel should return a map with without a key to 10",
+                null, ps.cancel().get(10));
+   }
 }
