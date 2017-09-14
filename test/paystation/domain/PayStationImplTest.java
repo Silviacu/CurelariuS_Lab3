@@ -157,15 +157,23 @@ public class PayStationImplTest {
     public void CanceledEntryDoesNotAddToTheAmountReturnedByEmpty()
           throws IllegalCoinException {
         Map<Integer, Integer> testMap = new HashMap();
-                testMap.put(5, 1);
+        testMap.put(5, 1);
         testMap.put(25, 1);
         ps.addPayment(5);
         ps.addPayment(25);
-
-       
         assertEquals("Oh no what is happening", testMap, ps.cancel());
-        
-        
     }  
+    
+    //third test
+    @Test
+    public void EmptyResetsTotalToZero()
+             throws IllegalCoinException {
+        Map<Integer, Integer> testMap = new HashMap();
+       
+        assertEquals(ps.getTotalAmountCollected(), 0);
+    }
+    
+//    fourth test
+   
 
 }
