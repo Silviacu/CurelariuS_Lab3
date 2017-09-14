@@ -11,6 +11,8 @@
  */
 package paystation.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -30,6 +32,7 @@ public class PayStationImplTest {
     @Test
     public void shouldDisplay2MinFor5Cents()
             throws IllegalCoinException {
+        
         ps.addPayment(5);
         assertEquals("Should display 2 min for 5 cents",
                 2, ps.readDisplay());
@@ -139,13 +142,26 @@ public class PayStationImplTest {
                 10, ps.readDisplay());
     }
     
+    //first test
     @Test
     public void emptyReturnsTotalAmountEntered()
         throws IllegalCoinException {
         ps.addPayment(5);
         ps.buy();
         assertEquals("Empty should return 5", 5, ps.empty());
-//        hi 
+
     }
+    
+    //second test
+    @Test
+    public void CanceledEntryDoesNotAddToTheAmountReturnedByEmpty()
+          throws IllegalCoinException {
+        Map<Integer, Integer> testMap = new HashMap();
+        
+       
+        assertEquals("Oh no what is happening", testMap, ps.cancel());
+        
+        
+    }  
 
 }
