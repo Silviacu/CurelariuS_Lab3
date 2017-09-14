@@ -65,7 +65,11 @@ public class PayStationImpl implements PayStation {
     
      @Override
     public int empty(){
-        return 5;
+        int totalAmountCollected_return = totalAmountCollected;
+        totalAmountCollected = 0;
+        return totalAmountCollected_return;
+
+
     }
 
 }
