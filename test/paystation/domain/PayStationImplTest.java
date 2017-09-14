@@ -209,4 +209,16 @@ public class PayStationImplTest {
        assertEquals("Cancel should return a map with without a key to 10",
                 null, ps.cancel().get(10));
    }
+   
+   @Test
+   public void CancelClearsMap()
+     throws IllegalCoinException {
+        Map<Integer, Integer> testMap = new HashMap();
+        ps.addPayment(25);
+        ps.addPayment(25);
+        ps.addPayment(5);
+   
+         assertEquals("Cancel clears my coin map",
+                testMap, ps.getMyCoinMap());
+   }
 }
