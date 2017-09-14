@@ -179,6 +179,16 @@ public class PayStationImplTest {
     }
     
 //    fourth test
-   
+   @Test
+   public void CancelReturnsMapContainingOneCoinEntered()
+     throws IllegalCoinException {
+    Map<Integer, Integer> testMap = new HashMap();
+        testMap.put(5, 1);
+        ps.addPayment(5);
+        assertEquals("Should return map with key 5 and value 1", testMap, ps.cancel());
+        
+   }
+    
+
 
 }
