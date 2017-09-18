@@ -1,5 +1,8 @@
 package paystation.domain;
 
+import java.util.Map;
+import java.util.HashMap;
+
 /**TESTING
  * Implementation of the pay station.
  *
@@ -23,9 +26,17 @@ public class PayStationImpl implements PayStation {
     
     private int insertedSoFar;
     private int timeBought;
-     private int totalAmountCollected;
+    private int totalAmountCollected;
+    private Map<Integer, Integer> myCoinMap = new HashMap();
+     
+    public int getTotalAmountCollected() {
+        return totalAmountCollected;
+    }
 
-
+    public Map getMyCoinMap(){
+        return myCoinMap;
+    }
+    
     @Override
     public void addPayment(int coinValue)
             throws IllegalCoinException {
@@ -37,6 +48,11 @@ public class PayStationImpl implements PayStation {
                 throw new IllegalCoinException("Invalid coin: " + coinValue);
         }
         insertedSoFar += coinValue;
+        //first says it is a nickle and then how many nickles
+        if(myCoinMap.get(coinValue)== null){
+           myCoinMap.put(coinValue, 0);
+        }
+        myCoinMap.put(coinValue, myCoinMap.get(coinValue)+1);
         timeBought = insertedSoFar / 5 * 2;
     }
 
@@ -55,12 +71,15 @@ public class PayStationImpl implements PayStation {
     }
 
     @Override
-    public void cancel() {
+    public Map <Integer, Integer> cancel() {
+        Map<Integer, Integer> currentCoinMap = new HashMap(myCoinMap);
         reset();
+        return currentCoinMap;
     }
     
     private void reset() {
         timeBought = insertedSoFar = 0;
+        myCoinMap.clear();
     }
     
      @Override
@@ -68,8 +87,6 @@ public class PayStationImpl implements PayStation {
         int totalAmountCollected_return = totalAmountCollected;
         totalAmountCollected = 0;
         return totalAmountCollected_return;
-
-
     }
 
 }
