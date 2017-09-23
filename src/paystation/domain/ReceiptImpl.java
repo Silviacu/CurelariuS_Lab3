@@ -14,14 +14,14 @@ package paystation.domain;
 
 public class ReceiptImpl implements Receipt {
 
-    private int value;
+    private double value;
 
-    public ReceiptImpl(int value) {
+    public ReceiptImpl(double value) {
         this.value = value;
     }
 
     @Override
-    public int value() {
+    public double value() {
         return value;
     }
 }

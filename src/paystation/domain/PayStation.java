@@ -19,6 +19,9 @@
  */
 package paystation.domain;
 
+import java.util.Map;
+import paystation.domain.RateStrategies.RateStrategy;
+
 public interface PayStation {
 
     /**
@@ -36,7 +39,7 @@ public interface PayStation {
      *
      * @return the number to display on the pay station display
      */
-    public int readDisplay();
+    public double readDisplay();
 
     /**
      * Buy parking time. Terminate the ongoing transaction and return a parking
@@ -49,11 +52,17 @@ public interface PayStation {
     /**
      * Cancel the present transaction. Resets the machine for a new transaction.
      */
-    public void cancel();
+    public Map<Integer, Integer> cancel();
     
     
     /**
      * Returns total paystaion empty coins. 
      */
     public int empty();
+    
+    public int getTotalAmountCollected();
+    
+    public Map getMyCoinMap();
+    
+    public void setRate(RateStrategy rs);
 }

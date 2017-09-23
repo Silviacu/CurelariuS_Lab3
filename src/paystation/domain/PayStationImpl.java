@@ -2,6 +2,7 @@ package paystation.domain;
 
 import java.util.Map;
 import java.util.HashMap;
+import paystation.domain.RateStrategies.*;
 
 /**TESTING
  * Implementation of the pay station.
@@ -25,10 +26,16 @@ import java.util.HashMap;
 public class PayStationImpl implements PayStation {
     
     private int insertedSoFar;
-    private int timeBought;
+    private double timeBought;
     private int totalAmountCollected;
     private Map<Integer, Integer> myCoinMap = new HashMap();
+    
+    private RateStrategy currentRateStrategy = new LinearRateStrategy();
      
+    public int getInsertedCoins() {
+        return insertedSoFar;
+    }
+    
     public int getTotalAmountCollected() {
         return totalAmountCollected;
     }
@@ -53,11 +60,12 @@ public class PayStationImpl implements PayStation {
            myCoinMap.put(coinValue, 0);
         }
         myCoinMap.put(coinValue, myCoinMap.get(coinValue)+1);
-        timeBought = insertedSoFar / 5 * 2;
+        //timeBought = insertedSoFar / 5 * 2;
+        timeBought = currentRateStrategy.calculateTime(insertedSoFar);
     }
 
     @Override
-    public int readDisplay() {
+    public double readDisplay() {
         return timeBought;
     }
 
@@ -88,5 +96,25 @@ public class PayStationImpl implements PayStation {
         totalAmountCollected = 0;
         return totalAmountCollected_return;
     }
+
+    @Override
+    public void setRate(RateStrategy rs) {
+        currentRateStrategy = rs;
+//            switch(s){
+//                case "linear":
+//                    currentRateStrategy = new LinearRateStrategy();
+//                    break;
+//                case "progressive":
+//                    currentRateStrategy = new ProgressiveRateStrategy();
+//                    break;
+//                case "alternate":
+//                    currentRateStrategy = new AlternatingRateStrategy();
+//                    break;
+//                default:
+//                    currentRateStrategy = new LinearRateStrategy();
+//            }
+    }
+    
+    
 
 }
